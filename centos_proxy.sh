@@ -32,16 +32,7 @@ sed -i ':a;N;$!ba;s/example.org;\n\W\+port = 1080/192.168.2.171;\n        port =
 sed -i '$a/usr/local/bin/redsocks -c /etc/redsocks.conf' /etc/rc.d/rc.local
 
 # config iptables
-iptables -D INPUT 5
-iptables -t nat -A OUTPUT -d 0.0.0.0/8 -j RETURN
-iptables -t nat -A OUTPUT -d 10.0.0.0/8 -j RETURN
-iptables -t nat -A OUTPUT -d 127.0.0.0/8 -j RETURN
-iptables -t nat -A OUTPUT -d 169.254.0.0/16 -j RETURN
-iptables -t nat -A OUTPUT -d 192.168.0.0/16 -j RETURN
-iptables -t nat -A OUTPUT -d 224.0.0.0/4 -j RETURN
-iptables -t nat -A OUTPUT -d 240.0.0.0/4 -j RETURN
-iptables -t nat -A OUTPUT -d 58.20.55.103 -j RETURN
-iptables -t nat -A OUTPUT -p tcp -j REDIRECT --to-ports 12345
+iptables -A OUTPUT -p tcp -d 172.19.0.0/16 -j REDIRECT --to-ports 12345 
 
 # save iptables config
 /sbin/service iptables save
@@ -49,3 +40,4 @@ iptables -t nat -A OUTPUT -p tcp -j REDIRECT --to-ports 12345
 # start redsocks
 redsocks -c /etc/redsocks.conf
 fi
+
