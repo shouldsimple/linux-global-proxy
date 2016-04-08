@@ -45,6 +45,7 @@ iptables -t nat -A OUTPUT -p tcp -d 172.19.0.0/16 -j REDIRECT --to-ports 12345
 
 # save iptables config
 /sbin/service iptables save
+chkconfig --level 53 iptables on
 
 # start redsocks
 redsocks -c /etc/redsocks.conf
