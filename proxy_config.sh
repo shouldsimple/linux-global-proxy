@@ -13,8 +13,8 @@ if ! has "gcc"; then
 yum install -y gcc-c++.x86_64
 fi
 
-if [ ! -f "/usr/lib64/libevent.so" ]; then
-yum install -y libevent libevent-devel
+if [ ! -f "/usr/lib64/libevent-2.0.so.5" ]; then
+yum install -y libevent2 libevent2-devel
 fi
 
 if ! has "git"; then
