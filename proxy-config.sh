@@ -34,14 +34,14 @@ rm -rf redsocks
 
 # config redsocks
 sed -i 's/daemon = off/daemon = on/g' /etc/redsocks.conf
-sed -i ':a;N;$!ba;s/example.org;\n\W\+port = 1080/192.168.2.171;\n        port = 10010/g' /etc/redsocks.conf
+sed -i ':a;N;$!ba;s/example.org;\n\W\+port = 1080/127.0.0.1;\n        port = 10010/g' /etc/redsocks.conf
 
 # start redsocks when system start
 sed -i '$a/usr/local/bin/redsocks -c /etc/redsocks.conf' /etc/rc.d/rc.local
 
 # config iptables
 iptables -D INPUT -j REJECT --reject-with icmp-host-prohibited
-iptables -t nat -A OUTPUT -p tcp -d 172.19.0.0/16 -j REDIRECT --to-ports 12345 
+iptables -t nat -A OUTPUT -p tcp -d 182.18.0.0/16 -j REDIRECT --to-ports 12345 
 
 # save iptables config
 /sbin/service iptables save
